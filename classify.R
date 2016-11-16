@@ -1,6 +1,7 @@
 classify <- function(coord1, coord2, coord3, bandList) {
   # Load necessary library
   library(jpeg)
+  library(shiny)
   
 	# ------------------------------------Part 1: Opening the images----------------------------------
 	# First we'll have to read in the pictures. The bandList should be a
@@ -12,8 +13,32 @@ classify <- function(coord1, coord2, coord3, bandList) {
 	# The code below must be filled in to create the pictureList. This is a list
 	# of pictures. Each picture was first read using readJPEG() (look this up!) and 
   # then put in the list.
-	pictureList <- list();
-	
+  
+  
+  #fuction to get file loc'
+  #100% not needed 
+  imageLocations <- function()
+  { 
+    n <- readline(prompt="Enter location of image: ")
+    return(n)
+  }
+
+  file1 <- imageLocations()
+
+  file2 <- imageLocations()
+
+  file3 <- imageLocations()
+
+  file4 <- imageLocations()
+
+  file5 <- imageLocations()
+
+  file6 <- imageLocations()
+
+  
+  #END YOUR CODE
+	pictureList <- list(readJPEG(file1),readJPEG(file2),readJPEG(file3),readJPEG(file4),readJPEG(file5),readJPEG(file6));
+	#pictureList
 
 
 
@@ -45,8 +70,13 @@ classify <- function(coord1, coord2, coord3, bandList) {
 	# You will now fill in the code below to create the picture stack from each image in the
 	# picture list. The dimensions will be 256 x 256 x 6. The stack is of type 'array'.
 	# This is a tricky one, so feel free to talk to each other and consult the internet.
-	pictureStack <- array();
 	
+	?array
+	
+	
+	
+	pictureStack <- array(data=pictureList, dim=c(256,256,6));
+	head(pictureStack)
 
 
 
@@ -67,7 +97,7 @@ classify <- function(coord1, coord2, coord3, bandList) {
 	# We'll need to create matrices to store the classified values afterwards.
 
 	# Create variable with dimension of one slice of the picture stack
-	dims <- # YOUR CODE HERE;
+	dims <- matrix(data=pictureStack[,,1],ncol = 256,nrow = 256)# YOUR CODE HERE;
 
 	# Create class matrices with size dims
 	class1 <- # YOUR CODE HERE;
