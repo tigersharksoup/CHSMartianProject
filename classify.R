@@ -38,7 +38,8 @@ classify <- function(coord1, coord2, coord3, bandList) {
   
   #END YOUR CODE
 	pictureList <- list(readJPEG(file1),readJPEG(file2),readJPEG(file3),readJPEG(file4),readJPEG(file5),readJPEG(file6));
-	#pictureList
+	#class(readJPEG(file1))
+	#head(pictureList)
 
 
 
@@ -70,14 +71,12 @@ classify <- function(coord1, coord2, coord3, bandList) {
 	# You will now fill in the code below to create the picture stack from each image in the
 	# picture list. The dimensions will be 256 x 256 x 6. The stack is of type 'array'.
 	# This is a tricky one, so feel free to talk to each other and consult the internet.
-	
-	?array
-	
-	
-	
-	pictureStack <- array(data=pictureList, dim=c(256,256,6));
-	head(pictureStack)
 
+	
+	
+	
+	pictureStack <- array(data = c(readJPEG(file1),readJPEG(file2),readJPEG(file3),readJPEG(file4),readJPEG(file5),readJPEG(file6)), dim = c(256, 256, 6));
+  #pictureStack[1,1,]
 
 
 
@@ -97,20 +96,22 @@ classify <- function(coord1, coord2, coord3, bandList) {
 	# We'll need to create matrices to store the classified values afterwards.
 
 	# Create variable with dimension of one slice of the picture stack
-	dims <- matrix(data=pictureStack[,,1],ncol = 256,nrow = 256)# YOUR CODE HERE;
+	dims <- list(x = 256, y = 256, z = 3)# YOUR CODE HERE;
 
 	# Create class matrices with size dims
-	class1 <- # YOUR CODE HERE;
-	class2 <- # YOUR CODE HERE;
-	class3 <- # YOUR CODE HERE;
-
-	# Create final image stack for output. Each class will be its own color.
-	red   <- # YOUR CODE HERE;
-	blue  <- # YOUR CODE HERE;
-	green <- # YOUR CODE HERE;
-	rgbList <- # YOUR CODE HERE;
-	classifiedImage <- # YOUR CODE HERE;
+	class1 <- matrix(data = 0, nrow=dims$x,ncol = dims$y)
+	class2 <- matrix(data = 0, nrow=dims$x,ncol = dims$y)
+	class3 <- matrix(data = 0, nrow=dims$x,ncol = dims$y)
+	#class3
+	#colors()
 	
+	# Create final image stack for output. Each class will be its own color.
+	red   <- matrix(data = 0, nrow=dims$x,ncol = dims$y)#rgb(1.0,.0,.0) # YOUR CODE HERE;
+	blue  <- matrix(data = 0, nrow=dims$x,ncol = dims$y)#rgb(.0,.0,1.0)# YOUR CODE HERE;
+	green <- matrix(data = 0, nrow=dims$x,ncol = dims$y)#rgb(.0,1.0,.0)# YOUR CODE HERE;
+	rgbList <- list(red, blue, green)# YOUR CODE HERE;
+	classifiedImage <- array(data = c(red, blue, green), dim = c(dims$x, dims$y, dims$z))   # YOUR CODE HERE;
+	classifiedImage[1,1,]
 
 
 
