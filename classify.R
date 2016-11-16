@@ -111,7 +111,7 @@ classify <- function(coord1, coord2, coord3, bandList) {
 	green <- matrix(data = 0, nrow=dims$x,ncol = dims$y)#rgb(.0,1.0,.0)# YOUR CODE HERE;
 	rgbList <- list(red, blue, green)# YOUR CODE HERE;
 	classifiedImage <- array(data = c(red, blue, green), dim = c(dims$x, dims$y, dims$z))   # YOUR CODE HERE;
-	classifiedImage[1,1,]
+	#classifiedImage[1,1,]
 
 
 
