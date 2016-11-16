@@ -1,7 +1,7 @@
 classify <- function(coord1, coord2, coord3, bandList) {
   # Load necessary library
   library(jpeg)
-  library(shiny)
+  #library(shiny)
   
 	# ------------------------------------Part 1: Opening the images----------------------------------
 	# First we'll have to read in the pictures. The bandList should be a
@@ -154,20 +154,26 @@ classify <- function(coord1, coord2, coord3, bandList) {
 
 	# YOUR CODE HERE
 	# Class 1: compare coord1 to every vector in the picture stack.
-
-
-
-
-	# YOUR CODE HERE
-	# Class 2: compare coord1 to every vector in the picture stack.
-
-
-
-
-
-	# YOUR CODE HERE
-	# Class 3: compare coord1 to every vector in the picture stack.
+	vecCoord1 <- c(pictureStack[82, 33,])
+	vecCoord1
 	
+	
+
+
+
+
+	# YOUR CODE HERE
+	# Class 2: compare coord2 to every vector in the picture stack.
+	vecCoord2 <- c(pictureStack[180, 163,])
+	vecCoord2
+
+
+
+
+	# YOUR CODE HERE
+	# Class 3: compare coord3 to every vector in the picture stack.
+	vecCoord3 <- c(pictureStack[240, 233,])
+	vecCoord3
 
 
 
