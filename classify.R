@@ -17,6 +17,9 @@ classify <- function(coord1, coord2, coord3, bandList) {
   
   #fuction to get file loc'
   #100% not needed 
+  
+  #/home/ian/R/R-code examples/R-code examples/CHSMartianProject-master/r1.JPG
+  
   imageLocations <- function()
   { 
     n <- readline(prompt="Enter location of image: ")
@@ -152,33 +155,132 @@ classify <- function(coord1, coord2, coord3, bandList) {
 	# (remember that last comma!)
 
 
+	# -----------------------------------------Part 4: Classification---------------------------------
+	# Now we will run our classification algorithm for each of our pixel choices.
+	# Compute the dot products of the chosen pixel vector against all the other pixels
+	# To get a vector from the stack, write pictureStack[x,y,] 
+	# (remember that last comma!)
+	
+	
 	# YOUR CODE HERE
 	# Class 1: compare coord1 to every vector in the picture stack.
 	vecCoord1 <- c(pictureStack[82, 33,])
 	vecCoord1
+	aMag <- sqrt(vecCoord1[1]^2+vecCoord1[2]^2+vecCoord1[3]^2+vecCoord1[4]^2+vecCoord1[5]^2+vecCoord1[6]^2)  #||a||
+	aMag 
+	bMag <- 0 #||b||
+	dotProduct <- 0
+	cosTheta <- 0
+	
+	for (i in 1:256)
+	{
+	  for (j in 1:256)
+	  {
+	    for (k in 1:6)
+	    {
+	      dotProduct <- dotProduct + (vecCoord1[k] * pictureStack[i,j,k])
+	                                   
+	        bMag <- bMag + (pictureStack[i,j,k]^2)                           
+	                                   
+	                                   
+	    }
+	    bMag
+	    bMag <- sqrt(bMag)
+	    cosTheta <- dotProduct/(aMag * bMag)
+	    class1[i,j] <- cosTheta
+	    
+	    bMag <- 0 #||b||
+	    dotProduct <- 0
+	    
+	  }
+	}
+	
+	class1
 	
 	
-
-
-
-
+	
+	
 	# YOUR CODE HERE
 	# Class 2: compare coord2 to every vector in the picture stack.
 	vecCoord2 <- c(pictureStack[180, 163,])
 	vecCoord2
-
-
-
-
+	aMag <- sqrt(vecCoord2[1]^2+vecCoord2[2]^2+vecCoord2[3]^2+vecCoord2[4]^2+vecCoord2[5]^2+vecCoord2[6]^2)  #||a||
+	aMag 
+	bMag <- 0 #||b||
+	dotProduct <- 0
+	cosTheta <- 0
+	
+	for (i in 1:256)
+	{
+	  for (j in 1:256)
+	  {
+	    for (k in 1:6)
+	    {
+	      dotProduct <- dotProduct + (vecCoord2[k] * pictureStack[i,j,k])
+	      
+	      bMag <- bMag + (pictureStack[i,j,k]^2)                           
+	      
+	      
+	    }
+	    bMag
+	    bMag <- sqrt(bMag)
+	    cosTheta <- dotProduct/(aMag * bMag)
+	    class2[i,j] <- cosTheta
+	    
+	    bMag <- 0 #||b||
+	    dotProduct <- 0
+	    
+	  }
+	}
+	
+	class2
+	
+	
+	
 	# YOUR CODE HERE
 	# Class 3: compare coord3 to every vector in the picture stack.
 	vecCoord3 <- c(pictureStack[240, 233,])
 	vecCoord3
-
-
-
-
-
+	aMag <- sqrt(vecCoord3[1]^2+vecCoord3[2]^2+vecCoord3[3]^2+vecCoord3[4]^2+vecCoord3[5]^2+vecCoord3[6]^2)  #||a||
+	aMag 
+	bMag <- 0 #||b||
+	dotProduct <- 0
+	cosTheta <- 0
+	
+	for (i in 1:256)
+	{
+	  for (j in 1:256)
+	  {
+	    for (k in 1:6)
+	    {
+	      dotProduct <- dotProduct + (vecCoord3[k] * pictureStack[i,j,k])
+	      
+	      bMag <- bMag + (pictureStack[i,j,k]^2)                           
+	      
+	      
+	    }
+	    bMag
+	    bMag <- sqrt(bMag)
+	    cosTheta <- dotProduct/(aMag * bMag)
+	    class3[i,j] <- cosTheta
+	    
+	    bMag <- 0 #||b||
+	    dotProduct <- 0
+	    
+	  }
+	}
+	
+	class3
+	
+	
+	
+	
+	
+	class1[44, 37]
+	class2[180, 90]
+	class3[230, 200]
+	
+	
 	# Test cases:
 	if (round(class1[44, 37], digits=6) != 0.998206) {
 	  print("Dot product was not applied correctly to class 1")
@@ -196,10 +298,12 @@ classify <- function(coord1, coord2, coord3, bandList) {
 	  return()
 	}
 	print('Dot products have been calculated: \u2713')
-
-
-
-
+	
+	
+	
+	
+	
+	
 	
 	# --------------------------------------Part 5: Create the final image----------------------------
 	
