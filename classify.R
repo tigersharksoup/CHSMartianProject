@@ -1,4 +1,4 @@
-classify <- function(coord1, coord2, coord3, bandList) {
+classify <- function(coord1, coord2, coord3, bandList) {# i like for user interfaces to walk you through what you need so not in the parameters
   # Load necessary library
   library(jpeg)
   #library(shiny)
@@ -116,6 +116,7 @@ classify <- function(coord1, coord2, coord3, bandList) {
 	classifiedImage <- array(data = c(red, blue, green), dim = c(dims$x, dims$y, dims$z))   # YOUR CODE HERE;
 	#classifiedImage[1,1,]
 
+	classifiedImage
 
 
 
@@ -308,34 +309,73 @@ classify <- function(coord1, coord2, coord3, bandList) {
 	# --------------------------------------Part 5: Create the final image----------------------------
 	
 	# Create the final matrix of rgb values for output
-	r   <- c(256, 0, 0);
-	g <- c(0, 256, 0);
-	b <- c(0, 0, 256);
+	r   <- c(256, 0, 0); #class 1
+	g   <- c(0, 256, 0); #class 2
+	b   <- c(0, 0, 256);#class 3
 	
 	print("Class colors have been set: \u2713")
 	
 	# YOUR CODE HERE
 	# Iterate over every pixel, compare the maximum values for that pixel from the class
 	# matrices form part 4 and then fill in that pixel with the respective color.
+	color = "none"
+	rock1 <- 0
+	rock2 <- 0
+	rock3 <- 0
+	rockundefined <- 0
+	for (i in 1:256)
+	{
+	  for (j in 1:256)
+	  {
+	    for (k in 1:1)
+	    {
+  	    if (class1[i,j] > class2[i,j] && class1[i,j] > class3[i,j])#IF one is biggest cosTheta(smallest angle)
+  	    {
+  	      classifiedImage[i,j,1] <- 1
+  	      rock1 <- rock1 + 1
+  	    }
+  	    else if (class2[i,j] > class3[i,j] && class2[i,j] > class1[i,j])#if 2 is biggest
+  	    {
+  	      classifiedImage[i,j,2] <- 1
+  	      rock2 <- rock2 + 1
+  	    }
+  	    else if (class3[i,j] > class1[i,j] && class3[i,j] > class1[i,j])#if 3 biggest
+  	    {
+  	      classifiedImage[i,j,3] <- 1
+  	      rock3 <- rock3 + 1
+  	    }
+	      else if (TRUE)
+	      {
+	        classifiedImage[i,j,] <- c(1,0,1)
+	        rockundefined < rockundefined + 1
+	      }
+	      
+	    }
+	  }
+	}
 	
-	
-	
-	
+	rock1
+	rock2
+	rock3
+	rockundefined
 	
 	
 	# Test cases:
 	# Check if random points are classified correctly
-	if (classifiedImage[1, 1,] != red || classifiedImage[83, 33,] != red || 
-	    classifiedImage[180, 163,] != green || classifiedImage[240, 233,] != blue ||
-	    classifiedImage[161, 77,] != blue) {
-	  print("Data was not classified correctly.") 
-	  print("Check red, blue, green coordinates and how you get your maximum value")
-	  print('Image classfied: \u2717')
-	  return()
-	}
+	#if (classifiedImage[1, 1,] != red || classifiedImage[83, 33,] != red || 
+	 #   classifiedImage[180, 163,] != green || classifiedImage[240, 233,] != blue ||
+	#    classifiedImage[161, 77,] != blue) {
+	#  print("Data was not classified correctly.") 
+	#  print("Check red, blue, green coordinates and how you get your maximum value")
+	#  print('Image classfied: \u2717')
+	#  return()
+	#}
 	
-  print('Image has been classified: \u2713')
+  #print('Image has been classified: \u2713')
 	
   # Now we have our classified image, coded by color
-	classifiedImage
+  #classifiedImage <- classify(classifiedImage[,,1],classifiedImage[,,2], classifiedImage[,,3])
+  classifiedImage 
+  writeJPEG(classifiedImage, "classifiedIMage.jpg")
 }
+
