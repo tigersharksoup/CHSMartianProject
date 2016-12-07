@@ -20,10 +20,13 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
   # then put in the list.
   
   
-  #fuction to get file loc'
-  #100% not needed 
   
+  
+  
+  #linux file location
   #/home/ian/R/R-code examples/R-code examples/CHSMartianProject-master/r1.JPG
+  #
+  #Coords at
   #[82, 33,]
   #[180, 163,]
   #[240, 233,]
@@ -35,13 +38,6 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
     return(n)
   }
   
-  
-  
-  pixel <- function()
-  { 
-    n <- readline(prompt="Enter coord for pixel location for different rock(in format x enter, y enter ans so on): ")
-    return(n)## need better way to do this
-  }
   
 
   file1 <- imageLocations()
@@ -56,22 +52,7 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 
   file6 <- imageLocations()
   
-  
-  rockCoordX1 <- pixel()
-  rockCoordY1 <- pixel()
-  
-  rockCoordX2 <- pixel()
-  rockCoordY2 <- pixel()
-  
-  rockCoordX3 <- pixel()
-  rockCoordY3 <- pixel()
-  
-  rockCoordX1
-  rockCoordY1
-  rockCoordX2
-  rockCoordY2
-  rockCoordX3
-  rockCoordY3
+
   
   #END YOUR CODE
 	pictureList <- list(readJPEG(file1),readJPEG(file2),readJPEG(file3),readJPEG(file4),readJPEG(file5),readJPEG(file6));
@@ -199,8 +180,7 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	
 	# YOUR CODE HERE
 	# Class 1: compare coord1 to every vector in the picture stack.
-	vecCoord1 <- c(pictureStack[82, 33,])
-	#vecCoord1 <- c(pictureStack[rockCoordX1,rockCoordX1,]) #need to fix
+	vecCoord1 <- c(pictureStack[82, 33,])#no input method yet
 	vecCoord1
 	aMag <- sqrt(vecCoord1[1]^2+vecCoord1[2]^2+vecCoord1[3]^2+vecCoord1[4]^2+vecCoord1[5]^2+vecCoord1[6]^2)  #||a||
 	aMag 
@@ -239,7 +219,6 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	# YOUR CODE HERE
 	# Class 2: compare coord2 to every vector in the picture stack.
 	vecCoord2 <- c(pictureStack[180, 163,])
-	#vecCoord2 <- c(pictureStack[rockCoordX2, rockCoordY2,])#FIX ME
 	vecCoord2
 	aMag <- sqrt(vecCoord2[1]^2+vecCoord2[2]^2+vecCoord2[3]^2+vecCoord2[4]^2+vecCoord2[5]^2+vecCoord2[6]^2)  #||a||
 	aMag 
@@ -277,7 +256,6 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	# YOUR CODE HERE
 	# Class 3: compare coord3 to every vector in the picture stack.
 	vecCoord3 <- c(pictureStack[240, 233,])
-	#vecCoord3 <- c(pictureStack[rockCoordX3, rockCoordY3,])#FIX
 	vecCoord3
 	aMag <- sqrt(vecCoord3[1]^2+vecCoord3[2]^2+vecCoord3[3]^2+vecCoord3[4]^2+vecCoord3[5]^2+vecCoord3[6]^2)  #||a||
 	aMag 
