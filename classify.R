@@ -26,10 +26,15 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
   #linux file location
   #/home/ian/R/R-code examples/R-code examples/CHSMartianProject-master/r1.JPG  or/a1.JPG
   #
-  #Coords at
+  #Coords For 'r' image set
   #[82, 33,]
   #[180, 163,]
   #[240, 233,]
+  
+  #Coords for 'a' image set
+  #[152, 129,]
+  #[53, 41,]
+  #[80, 144,]
   
   
   imageLocations <- function()
@@ -39,7 +44,7 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
   }
   Coords <- function()
   { 
-    n <- readline(prompt="Enter location of Coords: ")
+    n <- readline(prompt="Enter location of Coords(no spaces in form:X,Y): ")
     
     a1 <- as.character(n) ;
     a2 <- strsplit(a1, ",") ;
