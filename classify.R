@@ -24,7 +24,7 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
   
   
   #linux file location
-  #/home/ian/R/R-code examples/R-code examples/CHSMartianProject-master/r1.JPG
+  #/home/ian/R/R-code examples/R-code examples/CHSMartianProject-master/r1.JPG  or/a1.JPG
   #
   #Coords at
   #[82, 33,]
@@ -37,8 +37,19 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
     n <- readline(prompt="Enter location of image: ")
     return(n)
   }
+  Coords <- function()
+  { 
+    n <- readline(prompt="Enter location of Coords: ")
+    
+    a1 <- as.character(n) ;
+    a2 <- strsplit(a1, ",") ;
+    a3 <- unlist(a2) ;
+    n <- as.vector(as.numeric(a3)) ;
+    n
+    return(n)
+  }
   
-  
+  #/home/ian/R/R-code examples/R-code examples/CHSMartianProject-master/r1.JPG
 
   file1 <- imageLocations()
 
@@ -52,7 +63,11 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 
   file6 <- imageLocations()
   
-
+  Coord1 <- Coords()
+  
+  Coord2 <- Coords()
+  
+  Coord3 <- Coords()
   
   #END YOUR CODE
 	pictureList <- list(readJPEG(file1),readJPEG(file2),readJPEG(file3),readJPEG(file4),readJPEG(file5),readJPEG(file6));
@@ -180,7 +195,7 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	
 	# YOUR CODE HERE
 	# Class 1: compare coord1 to every vector in the picture stack.
-	vecCoord1 <- c(pictureStack[82, 33,])#no input method yet
+	vecCoord1 <- c(pictureStack[Coord1[1], Coord1[2],])#no input method yet #[152, 129,]
 	vecCoord1
 	aMag <- sqrt(vecCoord1[1]^2+vecCoord1[2]^2+vecCoord1[3]^2+vecCoord1[4]^2+vecCoord1[5]^2+vecCoord1[6]^2)  #||a||
 	aMag 
@@ -218,7 +233,7 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	
 	# YOUR CODE HERE
 	# Class 2: compare coord2 to every vector in the picture stack.
-	vecCoord2 <- c(pictureStack[180, 163,])
+	vecCoord2 <- c(pictureStack[Coord2[1], Coord2[2],]) #[53, 41,]
 	vecCoord2
 	aMag <- sqrt(vecCoord2[1]^2+vecCoord2[2]^2+vecCoord2[3]^2+vecCoord2[4]^2+vecCoord2[5]^2+vecCoord2[6]^2)  #||a||
 	aMag 
@@ -255,7 +270,7 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	
 	# YOUR CODE HERE
 	# Class 3: compare coord3 to every vector in the picture stack.
-	vecCoord3 <- c(pictureStack[240, 233,])
+	vecCoord3 <- c(pictureStack[Coord3[1], Coord3[2],]) #[80, 144,]
 	vecCoord3
 	aMag <- sqrt(vecCoord3[1]^2+vecCoord3[2]^2+vecCoord3[3]^2+vecCoord3[4]^2+vecCoord3[5]^2+vecCoord3[6]^2)  #||a||
 	aMag 
@@ -298,21 +313,21 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	
 	
 	# Test cases:
-	if (round(class1[44, 37], digits=6) != 0.998206) {
-	  print("Dot product was not applied correctly to class 1")
-	  print('Dot product 1 calculated: \u2717')
-	  return()
-	}
-	if (round(class2[180, 90], digits=7) != 0.9888548) {
-	  print("Dot product was not applied correctly to class 2")
-	  print('Dot product 2 calculated: \u2717')
-	  return()
-	}
-	if (round(class3[230, 200], digits=7) != 0.9976423) {
-	  print("Dot product was not applied correctly to class 3")
-	  print('Dot product 3 calculated: \u2717')
-	  return()
-	}
+	#if (round(class1[44, 37], digits=6) != 0.998206) {
+	 # print("Dot product was not applied correctly to class 1")
+	  #print('Dot product 1 calculated: \u2717')
+	  #return()
+	#}
+	#if (round(class2[180, 90], digits=7) != 0.9888548) {
+	 # print("Dot product was not applied correctly to class 2")
+	  #print('Dot product 2 calculated: \u2717')
+	  #return()
+	#}
+	#if (round(class3[230, 200], digits=7) != 0.9976423) {
+	 # print("Dot product was not applied correctly to class 3")
+	  #print('Dot product 3 calculated: \u2717')
+	  #return()
+	#}
 	print('Dot products have been calculated: \u2713')
 	
 	
@@ -338,23 +353,31 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	rock2 <- 0
 	rock3 <- 0
 	rockundefined <- 0
+	
+	nothing <- 0
+	
 	for (i in 1:256)
 	{
 	  for (j in 1:256)
 	  {
 	    for (k in 1:1)
 	    {
-  	    if (class1[i,j] > class2[i,j] && class1[i,j] > class3[i,j])#IF one is biggest cosTheta(smallest angle)
+	      
+  	    if (is.null(class3[i,j]))
+  	    {
+  	      nothing <- nothing +1
+  	    }
+	      else if (class1[i,j] >= class2[i,j] && class1[i,j] >= class3[i,j])#IF one is biggest cosTheta(smallest angle)
   	    {
   	      classifiedImage[i,j,1] <- 1
   	      rock1 <- rock1 + 1
   	    }
-  	    else if (class2[i,j] > class3[i,j] && class2[i,j] > class1[i,j])#if 2 is biggest
+  	    else if (class2[i,j] >= class3[i,j] && class2[i,j] >= class1[i,j])#if 2 is biggest
   	    {
   	      classifiedImage[i,j,2] <- 1
   	      rock2 <- rock2 + 1
   	    }
-  	    else if (class3[i,j] > class1[i,j] && class3[i,j] > class1[i,j])#if 3 biggest
+  	    else if (class3[i,j] >= class1[i,j] && class3[i,j] >= class1[i,j])#if 3 biggest
   	    {
   	      classifiedImage[i,j,3] <- 1
   	      rock3 <- rock3 + 1
@@ -368,7 +391,18 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	    }
 	  }
 	}
-	
+	nothing
+	test <- 0
+	for (i in 1:256)
+	{
+	  for (j in 1:256)
+	  {
+	if(class1[i,j] > class2[i,j] && class1[i,j] > class3[i,j])
+	{
+	  test <- test + 1
+	}
+	  }
+	}
 	rock1
 	rock2
 	rock3
