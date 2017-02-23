@@ -36,6 +36,21 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
   #[53, 41,]
   #[80, 144,]
   
+  #b
+  #[34,34]
+  #[80,146]
+  #[207,176]
+  
+  #f
+  #[138,124]
+  #[1,1]
+  #[113,252]
+  
+  #q
+  #[40,8]
+  #[100,102]
+  #[61,227] or [16,52]
+  
   
   imageLocations <- function()
   { 
@@ -114,11 +129,12 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	
 	
 	pictureStack <- array(data = c(readJPEG(file1),readJPEG(file2),readJPEG(file3),readJPEG(file4),readJPEG(file5),readJPEG(file6)), dim = c(256, 256, 6));
-  #pictureStack[1,1,]
+  #pictureStack[1,99,]
+	
 
 
 
-	# Test cases:
+	# Test cases(make sure image is 256X256):
 	
 	if (dim(pictureStack)[1] != 256 || dim(pictureStack)[2] != 256 || dim(pictureStack)[3] != 6) {
 	  print("pictureStack does not have correct number of dimensions (should be 256 256 6)")
@@ -140,8 +156,7 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	class1 <- matrix(data = 0, nrow=dims$x,ncol = dims$y)
 	class2 <- matrix(data = 0, nrow=dims$x,ncol = dims$y)
 	class3 <- matrix(data = 0, nrow=dims$x,ncol = dims$y)
-	#class3
-	#colors()
+
 	
 	# Create final image stack for output. Each class will be its own color.
 	red   <- matrix(data = 0, nrow=dims$x,ncol = dims$y)#rgb(1.0,.0,.0) # YOUR CODE HERE;
@@ -149,7 +164,7 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	green <- matrix(data = 0, nrow=dims$x,ncol = dims$y)#rgb(.0,1.0,.0)# YOUR CODE HERE;
 	rgbList <- list(red, blue, green)# YOUR CODE HERE;
 	classifiedImage <- array(data = c(red, blue, green), dim = c(dims$x, dims$y, dims$z))   # YOUR CODE HERE;
-	#classifiedImage[1,1,]
+
 
 	classifiedImage
 
@@ -189,16 +204,7 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	# Compute the dot products of the chosen pixel vector against all the other pixels
 	# To get a vector from the stack, write pictureStack[x,y,] 
 	# (remember that last comma!)
-
-
-	# -----------------------------------------Part 4: Classification---------------------------------
-	# Now we will run our classification algorithm for each of our pixel choices.
-	# Compute the dot products of the chosen pixel vector against all the other pixels
-	# To get a vector from the stack, write pictureStack[x,y,] 
-	# (remember that last comma!)
 	
-	
-	# YOUR CODE HERE
 	# Class 1: compare coord1 to every vector in the picture stack.
 	vecCoord1 <- c(pictureStack[Coord1[1], Coord1[2],])#no input method yet #[152, 129,]
 	vecCoord1
@@ -307,32 +313,7 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	}
 	
 	class3
-	
-	
-	
-	
-	
-	class1[44, 37]
-	class2[180, 90]
-	class3[230, 200]
-	
-	
-	# Test cases:
-	#if (round(class1[44, 37], digits=6) != 0.998206) {
-	 # print("Dot product was not applied correctly to class 1")
-	  #print('Dot product 1 calculated: \u2717')
-	  #return()
-	#}
-	#if (round(class2[180, 90], digits=7) != 0.9888548) {
-	 # print("Dot product was not applied correctly to class 2")
-	  #print('Dot product 2 calculated: \u2717')
-	  #return()
-	#}
-	#if (round(class3[230, 200], digits=7) != 0.9976423) {
-	 # print("Dot product was not applied correctly to class 3")
-	  #print('Dot product 3 calculated: \u2717')
-	  #return()
-	#}
+
 	print('Dot products have been calculated: \u2713')
 	
 	
@@ -360,22 +341,19 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	rockundefined <- 0
 	
 	nothing <- 0
-	
 	for (i in 1:256)
 	{
-	  for (j in 1:256)
-	  {
-	    for (k in 1:1)
-	    {
-	      
-  	    if (is.null(class3[i,j]))
+	   for (j in 1:256)
+	   {
+  	    if (is.nan(class3[i,j]) || is.nan(class2[i,j]) || is.nan(class1[i,j]))
   	    {
   	      nothing <- nothing +1
   	    }
-	      else if (class1[i,j] >= class2[i,j] && class1[i,j] >= class3[i,j])#IF one is biggest cosTheta(smallest angle)
+	      else if (class1[i,j] >= class2[i,j] && class1[i,j] >= class3[i,j]) # IF one is biggest cosTheta(smallest angle)
   	    {
   	      classifiedImage[i,j,1] <- 1
   	      rock1 <- rock1 + 1
+  	      
   	    }
   	    else if (class2[i,j] >= class3[i,j] && class2[i,j] >= class1[i,j])#if 2 is biggest
   	    {
@@ -392,43 +370,24 @@ classify <- function() {#coord1, coord2, coord3, bandList) {# i like for user in
 	        classifiedImage[i,j,] <- c(1,0,1)
 	        rockundefined < rockundefined + 1
 	      }
-	      
-	    }
-	  }
-	}
+  	  }
+  	}
+	
+	class3[1,99]
+	
+	
+	
 	nothing
-	test <- 0
-	for (i in 1:256)
-	{
-	  for (j in 1:256)
-	  {
-	if(class1[i,j] > class2[i,j] && class1[i,j] > class3[i,j])
-	{
-	  test <- test + 1
-	}
-	  }
-	}
+	print(nothing)
 	rock1
 	rock2
 	rock3
 	rockundefined
 	
 	
-	# Test cases:
-	# Check if random points are classified correctly
-	#if (classifiedImage[1, 1,] != red || classifiedImage[83, 33,] != red || 
-	 #   classifiedImage[180, 163,] != green || classifiedImage[240, 233,] != blue ||
-	#    classifiedImage[161, 77,] != blue) {
-	#  print("Data was not classified correctly.") 
-	#  print("Check red, blue, green coordinates and how you get your maximum value")
-	#  print('Image classfied: \u2717')
-	#  return()
-	#}
+  print('Image has been classified: \u2713')
 	
-  #print('Image has been classified: \u2713')
-	
-  # Now we have our classified image, coded by color
-  #classifiedImage <- classify(classifiedImage[,,1],classifiedImage[,,2], classifiedImage[,,3])
+  
   classifiedImage 
   writeJPEG(classifiedImage, "classifiedIMage.jpg")
   
